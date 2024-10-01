@@ -1,47 +1,17 @@
-services:
-  vuejs_lms_db:
-    image: mysql
-    container_name: vuejs_lms_db
-    environment:
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-    ports:
-      - 3307:3306
-    volumes:
-      - vuejs_lms_data:/var/lib/mysql
-    networks:
-      - vuejs_lms
-    
+services:    
   vuejs_lms:
     build: .
     container_name: vuejs_lms
     image: vuejs_lms:01
-    ports:
-      - 3005:80
-    depends_on:
-      - vuejs_lms_db
     volumes:
       - .:/var/www/html/vuejs_lms
-    networks:
-      - vuejs_lms
-
-  adminer:
-    image: adminer
-    container_name: vuejs_lms_adminer
-    restart: always
     ports:
-      - 8081:8080
+      - 3005:80
     environment:
-      - ADMINER_DEFAULT_SERVER=vuejs_lms_db
+      DATABASE_URL: "mysql://root:root@172.18.0.1:3306"
     networks:
-      - vuejs_lms
+      - mysql_database
 
 networks:
-  vuejs_lms:
-    driver: bridge
-
-volumes:
-  vuejs_lms_data:
+  mysql_database:
+    external: true
