@@ -7,24 +7,22 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "composer",
             "url": "https://spark.laravel.com"
         }
     ],
     "require": {
         "php": "^8.2",
+        "backpack/crud": "*",
+        "backpack/theme-tabler": "^1.2",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
-        "laravel/spark-stripe": "5.0.0",
-        "laravel/nova": "^4.0",
+        "laravel/spark-stripe": "5.5.0",
         "laravel/tinker": "^2.9",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
+        "backpack/generators": "^4.0",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
         "laravel/pint": "^1.13",

@@ -17,6 +17,17 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd pdo pdo_mysql \
     && rm -rf /var/lib/apt/lists/*
 
+# Install additional PHP extensions
+RUN apt-get update && apt-get install -y \
+    libxml2-dev \
+    libzip-dev \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install soap \
+    && docker-php-ext-install intl \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-install opcache \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs
@@ -24,23 +35,23 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Add Adminer installation
-RUN curl -L "https://www.adminer.org/latest.php" -o /var/www/html/revgentv/public/adminer.php
-
 # Copy composer json file
-COPY composer.json ./
-
-# Install Composer dependencies
-RUN composer install --ignore-platform-reqs
+COPY composer.json auth.json ./
 
 # Copy package json file
 COPY package.json ./
 
-# Install Node.js dependencies
-RUN npm install
-
 # Copy project files
 COPY . /var/www/html/vuejs_lms
+
+# Add Adminer installation
+RUN curl -L "https://www.adminer.org/latest.php" -o /var/www/html/vuejs_lms/public/adminer.php
+
+# Install Composer dependencies
+RUN composer install --ignore-platform-reqs
+
+# Install Node.js dependencies
+RUN npm install
 
 # Make artisan executable
 RUN chmod +x artisan
