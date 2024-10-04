@@ -2,11 +2,13 @@ services:
   vuejs_lms:
     build: .
     container_name: vuejs_lms
-    image: vuejs_lms:01
+    image: vuejs_lms
+    restart: always
     volumes:
       - .:/var/www/html/vuejs_lms
     ports:
       - 3005:80
+      - 5173:5173
     environment:
       DATABASE_URL: "mysql://root:root@172.18.0.1:3306"
     networks:

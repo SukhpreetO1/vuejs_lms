@@ -45,7 +45,7 @@ COPY package.json ./
 COPY . /var/www/html/vuejs_lms
 
 # Add Adminer installation
-RUN curl -L "https://www.adminer.org/latest.php" -o /var/www/html/vuejs_lms/public/adminer.php
+RUN curl -k -L "https://www.adminer.org/latest.php" -o /var/www/html/vuejs_lms/public/adminer.php
 
 # Install Composer dependencies
 RUN composer install --ignore-platform-reqs
@@ -60,7 +60,7 @@ RUN chmod +x artisan
 COPY ./nginx.conf /etc/nginx/sites-available/default
 
 # Expose the ports
-EXPOSE 80
+EXPOSE 80 5173
 
-# Start Nginx and PHP-FPM
-CMD ["sh", "-c", "service nginx start && php-fpm"]
+# Start Nginx, PHP-FPM, and run development servers
+CMD ["sh", "-c", "service nginx start && php-fpm & php artisan serve --host=0.0.0.0 --port=8000 & npm run dev"]
