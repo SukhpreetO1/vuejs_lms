@@ -2,9 +2,14 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import CrossLogo from '@/Components/CrossLogo.vue';
+
+import { ref } from 'vue';
+import Modal from "../../Components/Modal.vue";
+import Login from '@/Pages/Auth/Login.vue';
+const showLoginModal = ref(false);
 
 const form = useForm({
     name: '',
@@ -18,6 +23,10 @@ const submit = () => {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
+
+const openLoginModal = () => {
+    showLoginModal.value = true;
+};
 </script>
 
 <template>
@@ -25,8 +34,14 @@ const submit = () => {
         <Head title="Register" />
 
         <form @submit.prevent="submit">
+            <header class="py-14 text-center md:px-16 text-white">
+                <div class="text-4xl font-bold">Sign Up!</div>
+            </header>
+            <div class="absolute text-white top-6 right-6">
+                <CrossLogo class="h-10 bg-slate-500 px-3 py-3 rounded-lg cursor-pointer" @click="$emit('close', true)"/>
+            </div>
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Name" class="text-sky-200"/>
 
                 <TextInput
                     id="name"
@@ -42,7 +57,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email" class="text-sky-200"/>
 
                 <TextInput
                     id="email"
@@ -57,7 +72,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Password" class="text-sky-200"/>
 
                 <TextInput
                     id="password"
@@ -72,7 +87,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel for="password_confirmation" value="Confirm Password" class="text-sky-200"/>
 
                 <TextInput
                     id="password_confirmation"
@@ -86,17 +101,20 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="my-4 w-full mt-8">
+                <button class="text-white bg-blue-600 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-400 focus:outline-none font-medium rounded-lg text-base px-4 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 signup_page flex md:flex md:w-full md:order-1 items-center justify-center" :disabled="form.processing">
                     Register
-                </PrimaryButton>
+                </button>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <!-- <Link :href="route('login')" class="text-sky-200 hover:underline rounded-md focus:outline-none" > -->
+                <button @click.prevent="openLoginModal" class="text-sky-200 hover:underline rounded-md focus:outline-none" >
+                    Already registered?
+                </button>    
+                <Modal v-if="showLoginModal" :show="showLoginModal" @close="showLoginModal = false" max-width="2xl">
+                    <Login @close="showLoginModal = false" />
+                </Modal>
             </div>
         </form>
     </GuestLayout>

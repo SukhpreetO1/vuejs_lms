@@ -13,14 +13,10 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libfreetype6-dev \
     nginx \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install additional PHP extensions
-RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql \
     && docker-php-ext-install zip \
     && docker-php-ext-install soap \
     && docker-php-ext-install intl \

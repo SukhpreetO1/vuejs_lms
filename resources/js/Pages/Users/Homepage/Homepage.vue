@@ -1,16 +1,11 @@
 <template>
-    <div class="bg-slate-900">
-        <Navbar />
-    </div>
+  <Head title="Dashboard" />
+  <Navbar />
+  <HomepageDetail />
 </template>
 
-<script>
+<script setup>
 import Navbar from './Navbar/Navbar.vue';
-
-export default {
-  name: 'Homepage',
-  components: {
-    Navbar,
-  },
-};
+import HomepageDetail from './Partials/HomepageDetail.vue';
+import { Head } from '@inertiajs/vue3';
 </script>
