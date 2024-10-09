@@ -8,6 +8,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+        "./node_modules/flowbite/**/*.js"
     ],
 
     theme: {
@@ -15,8 +16,14 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'custom-image': "url('/public/images/background.jpg')",
+            },
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms, 
+        require('flowbite/plugin')
+    ],
 };

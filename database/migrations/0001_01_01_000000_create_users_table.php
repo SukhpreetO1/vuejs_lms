@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments("id")->primary();
             $table->string('name');
-            $table->unsignedInteger('role_id')->default("1")->index();
+            $table->unsignedInteger('role_id')->default("2")->index();
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('pm_type')->nullable();
             $table->string('pm_last_four', 4)->nullable();
             $table->string('pm_expiration')->nullable();
-            $table->text('extra_billing_information');
+            $table->text('extra_billing_information')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
             $table->string('billing_address')->nullable();
             $table->string('billing_address_line_2')->nullable();
