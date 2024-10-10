@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses_video_links', function (Blueprint $table) {
+        Schema::create('course_topics', function (Blueprint $table) {
             $table->increments('id')->primary();
-            $table->unsignedInteger("course_id")->index();
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->text("links");
+            $table->string('name')->nullable();
+            $table->unsignedInteger("course_field_id")->index();
+            $table->foreign('course_field_id')->references('id')->on('course_fields');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent();
         });
@@ -26,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses_video_links');
+        Schema::dropIfExists('course_topics');
     }
 };
-
