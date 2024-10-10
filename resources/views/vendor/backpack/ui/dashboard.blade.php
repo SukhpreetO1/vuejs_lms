@@ -13,12 +13,11 @@
             ->accentColor('primary')
             ->ribbon(['top', 'la-user'])
             ->progressClass('progress-bar')
-            ->value(239)
+            ->value($user_count . '<a href="/admin/users" class="text-white">View Details</a>')
             ->description('Total Users')
-            ->progress(100 * (int)239 / 1000)
-            ->hint(1000 - 239 . ' more coming'),
+            ->progress(100 * $user_count / 100)
+            ->hint($user_count > 100 ? 100 - $user_count . ' more coming' : ''),
     ]);
-
 @endphp
 
 @section('content')

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 // --------------------------
@@ -16,6 +17,7 @@ Route::group([
     ),
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
+    Route::get('/dashboard', [ AdminController::class, 'dashboard' ])->name('admin.dashboard');
     Route::crud('roles', 'RolesCrudController');
     Route::crud('users', 'UsersCrudController');
 }); // this should be the absolute last line of this file
