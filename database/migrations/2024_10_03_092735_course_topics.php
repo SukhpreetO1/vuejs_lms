@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->unsignedInteger("course_field_id")->index();
             $table->foreign('course_field_id')->references('id')->on('course_fields');
+            $table->text('course_image')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent();
         });

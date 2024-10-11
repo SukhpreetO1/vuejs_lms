@@ -20,6 +20,12 @@ Route::group([
     Route::get('/dashboard', [ AdminController::class, 'dashboard' ])->name('admin.dashboard');
     Route::crud('roles', 'RolesCrudController');
     Route::crud('users', 'UsersCrudController');
+    Route::crud('course-fields', 'CourseFieldsCrudController');
+    Route::crud('courses', 'CoursesCrudController');
+    Route::crud('course-topics', 'CourseTopicsCrudController');
+    Route::crud('courses-video-details', 'CoursesVideoDetailsCrudController');
+    Route::crud('author-details', 'AuthorDetailsCrudController');
+    Route::crud('author-social-links', 'AuthorSocialLinksCrudController');
 }); // this should be the absolute last line of this file
 
 /**
