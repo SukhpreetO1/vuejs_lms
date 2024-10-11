@@ -12,6 +12,7 @@ class CourseTopics extends Model
 {
     use CrudTrait;
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait, \Venturecraft\Revisionable\RevisionableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ class CourseTopics extends Model
     */
     public function course_fields(){
         return $this->belongsTo(CourseFields::class, 'course_field_id');
+    }
+
+    public function courses(){
+        return $this->belongsToMany(Courses::class, 'course_id');
     }
 
     /*

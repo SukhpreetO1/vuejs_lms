@@ -10,6 +10,7 @@ class Courses extends Model
 {
     use CrudTrait;
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait, \Venturecraft\Revisionable\RevisionableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +36,17 @@ class Courses extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function users(){
+        return $this->belongsTo(Users::class, 'user_id');
+    }
+
+    public function author_details(){
+        return $this->belongsTo(AuthorDetails::class, 'author_id');
+    }
+
+    public function course_topics(){
+        return $this->belongsTo(CourseTopics::class, 'course_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

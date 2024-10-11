@@ -24,9 +24,19 @@ class CoursesRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            // 'name' => 'required|min:5|max:255'
+        $rules = [
+            'user_id' => 'required',
+            'author_id' => 'required',
+            'course_id' => 'required',
+            'description' => 'required',
         ];
+
+        if ($this->isMethod('post')) {
+            $rules['title'] = 'required|max:255|unique:courses,title';
+        } else {
+            $rules['title'] = 'required|max:255';
+        }
+        return $rules;
     }
 
     /**

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedInteger("user_id")->index();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('desctiption');
+            $table->text('description');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent();
         });

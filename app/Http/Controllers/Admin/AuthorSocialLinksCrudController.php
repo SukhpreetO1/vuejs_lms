@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AuthorSocialLinksRequest;
+use App\Models\AuthorDetails;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -18,6 +19,7 @@ class AuthorSocialLinksCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\ReviseOperation\ReviseOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -39,7 +41,28 @@ class AuthorSocialLinksCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::orderBy('id', 'asc');
+        CRUD::column('id');
+        CRUD::column('author_details.name')->label('Author')->wrapper([
+            'href' => function($crud, $column, $entry) {
+                return backpack_url("author-details/" . $entry->author_id . "/show");
+            }
+        ]);
+
+        // CRUD::column('name')->label('Social Platform');
+        CRUD::column('name')->label('Social Platform')->type('text')->value(function($entry) {
+            $platforms = [
+                'facebook.com' => 'Facebook',
+                'twitter.com' => 'Twitter',
+                'instagram.com' => 'Instagram',
+                'linkedin.com' => 'LinkedIn',
+                'github.com' => 'GitHub',
+            ];
+            $host = parse_url($entry->links, PHP_URL_HOST);
+            $host = preg_replace('/^www\./', '', $host);
+            return $platforms[$host] ?? ucfirst($host);
+        });
+        CRUD::column('links')->label('Social Link')->type('url')->target('_blank');
 
         /**
          * Columns can be defined using the fluent syntax:
@@ -56,7 +79,8 @@ class AuthorSocialLinksCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(AuthorSocialLinksRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        CRUD::field('author_id')->type('select')->label('Author')->entity('author_details')->modal(AuthorDetails::class)->attribute('name');
+        CRUD::field('links')->label('Social Link');
 
         /**
          * Fields can be defined using the fluent syntax:
@@ -73,5 +97,29 @@ class AuthorSocialLinksCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function setupShowOperation()
+    {
+        CRUD::column('author_details.name')->label('Author')->wrapper([
+            'href' => function($crud, $column, $entry) {
+                return backpack_url("author-details/" . $entry->author_id . "/show");
+            }
+        ]);
+        CRUD::column('name')->label('Social Platform')->type('text')->value(function($entry) {
+            $platforms = [
+                'facebook.com' => 'Facebook',
+                'twitter.com' => 'Twitter',
+                'instagram.com' => 'Instagram',
+                'linkedin.com' => 'LinkedIn',
+                'github.com' => 'GitHub',
+            ];
+            $host = parse_url($entry->links, PHP_URL_HOST);
+            $host = preg_replace('/^www\./', '', $host);
+            return $platforms[$host] ?? ucfirst($host);
+        });
+        CRUD::column('links')->label('Social Link')->type('url')->target('_blank');
+        CRUD::column('created_at')->label('Created');
+        CRUD::column('updated_at')->label('Updated');
     }
 }

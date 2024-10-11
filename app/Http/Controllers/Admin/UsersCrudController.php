@@ -102,8 +102,8 @@ class UsersCrudController extends CrudController
         CRUD::column('name')->label("Name")->tab('Details');
         CRUD::column('email')->label("Email")->tab('Details');
         CRUD::column('email_verified_at')->label("Email Verified")->tab('Details');
-        CRUD::column('created_at')->label('Created At');
-        CRUD::column('updated_at')->label('Updated At');
+        CRUD::column('created_at')->label('Created At')->tab('Details');
+        CRUD::column('updated_at')->label('Updated At')->tab('Details');
 
         CRUD::column('stripe_id')->label('Stripe ID')->tab('Stripe Details');
         CRUD::column('pm_type')->label('PM Type')->tab('Stripe Details');

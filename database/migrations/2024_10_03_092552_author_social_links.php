@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('author_social_links', function (Blueprint $table) {
             $table->increments('id')->primary();
-            $table->string('name')->nullable();
             $table->unsignedInteger("author_id")->index();
             $table->foreign('author_id')->references('id')->on('author_details');
             $table->text('links');

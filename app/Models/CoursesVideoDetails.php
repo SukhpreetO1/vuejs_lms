@@ -10,6 +10,7 @@ class CoursesVideoDetails extends Model
 {
     use CrudTrait;
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait, \Venturecraft\Revisionable\RevisionableTrait;
 
     /*
     |--------------------------------------------------------------------------

@@ -30,6 +30,8 @@ class CourseTopicsRequest extends FormRequest
 
         if ($this->isMethod('post')) {
             $rules['name'] = 'required|max:255|unique:course_topics,name';
+        } else {
+            $rules['name'] = 'required|max:255';
         }
 
         return $rules;

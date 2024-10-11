@@ -24,11 +24,17 @@ class UsersRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:5|max:255',
+        $rules = [
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:5|max:16'
         ];
+
+        if ($this->isMethod('post')) {
+            $rules['name'] = 'required|max:255|unique:users,name';
+        } else {
+            $rules['name'] = 'required|max:255';
+        }
+        return $rules;
     }
 
     /**

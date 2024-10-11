@@ -19,6 +19,7 @@ class CourseTopicsCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\ReviseOperation\ReviseOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -40,9 +41,9 @@ class CourseTopicsCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        // CRUD::setFromDb(); // set columns from db columns.
         CRUD::orderBy('id', 'asc');
         CRUD::column('id');
-        // CRUD::setFromDb(); // set columns from db columns.
         CRUD::column('course_image')->label('course image')->type('image')->prefix('storage/');
         CRUD::column('name')->label('name');
         CRUD::column('course_fields.title')->label('course heading')->wrapper([

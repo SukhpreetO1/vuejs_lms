@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\CoursesRequest;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -47,7 +48,17 @@ class Users extends Model
     */
     public function role()
     {
-        return $this->belongsTo(Roles::class);
+        return $this->belongsTo(Roles::class, 'role_id');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(CoursesRequest::class, 'course_id');
+    }
+
+    public function author_details()
+    {
+        return $this->belongsToMany(AuthorDetails::class, 'author_id');
     }
 
     /*

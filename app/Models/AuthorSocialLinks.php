@@ -10,6 +10,7 @@ class AuthorSocialLinks extends Model
 {
     use CrudTrait;
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait, \Venturecraft\Revisionable\RevisionableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +36,10 @@ class AuthorSocialLinks extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function author_details()
+    {
+        return $this->belongsTo(AuthorDetails::class, 'author_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
