@@ -3,13 +3,11 @@
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [Dashboard::class, 'index'])->name('homepage');
 
-Route::get("/browse/all", function () {
-    return Inertia::render("Dashboard");
-})->name('/browse/all');
+Route::get('/browse/all',                                            [Dashboard::class, 'index'])->name('homepage');
+Route::get('/browse/{course_topics}', [Dashboard::class, 'course_topics'])->name('course_topics');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
