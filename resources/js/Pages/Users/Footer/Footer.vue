@@ -8,7 +8,7 @@
                 </div>
                 <div class="flex text-white">
                     <div class="w-36">
-                        <h3 class="mb-6 text-2xl font-black leading-tighter">LMS</h3>
+                        <h3 class="mb- text-2xl font-black leading-tighter">LMS</h3>
                         <p>test</p>
                         <p>test</p>
                         <p>test</p>
@@ -19,7 +19,7 @@
                         <p>test</p>
                     </div>
                     <div class="w-36">
-                        <h3 class="mb-6 text-2xl font-black leading-tighter">LMS</h3>
+                        <h3 class="mb- text-2xl font-black leading-tighter">LMS</h3>
                         <p>test</p>
                         <p>test</p>
                         <p>test</p>
@@ -27,7 +27,7 @@
                         <p>test</p>
                     </div>
                     <div class="w-36">
-                        <h3 class="mb-6 text-2xl font-black leading-tighter">LMS</h3>
+                        <h3 class="mb- text-2xl font-black leading-tighter">LMS</h3>
                         <p>test</p>
                         <p>test</p>
                         <p>test</p>
