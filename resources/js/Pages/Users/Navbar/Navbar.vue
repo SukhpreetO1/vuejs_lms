@@ -35,10 +35,10 @@
                     </div>
                 </div>
                 <div v-else class="p-4 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3 pr-8">
-                    <Link href="/login" class="text-sky-200 bg-slate-700 hover:bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 login_page" @click="showLoginModal = true">
+                    <Link href="/login" class="text-sky-200 bg-slate-700 hover:bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 login_page">
                         Sign In
                     </Link>
-                    <Link href="/register" class="text-white bg-blue-600 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-400 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 signup_page hidden md:flex md:w-auto md:order-1" @click="showSignUpModal = true">
+                    <Link href="/register" class="text-white bg-blue-600 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-400 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 signup_page hidden md:flex md:w-auto md:order-1">
                         Get Started for free
                     </Link>
                     <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
@@ -77,10 +77,6 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import { Link, usePage } from '@inertiajs/vue3';
-import { ref } from 'vue';
-
-const showLoginModal = ref(false);
-const showSignUpModal = ref(false);
 
 const { props } = usePage();
 const is_loggedin = props.auth.user !== null;

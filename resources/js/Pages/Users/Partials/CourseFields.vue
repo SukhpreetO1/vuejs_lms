@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center">
-        <ul class="flex gap-10">
+        <ul class="flex gap-12">
             <li>
                 <Link href="/browse/all" class="text-slate-400 font-black navbar-link group block flex-shrink-0 text-md uppercase text-card-200 hover:text-white xl:text-center py-5 hover:border-b-4 hover:border-b-blue-500" :class="{ 'is-active': isActive('/browse/all') }">
                     All Topics
