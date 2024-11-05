@@ -38,10 +38,10 @@ COPY composer.json auth.json ./
 COPY package.json ./
 
 # Copy project files
-COPY . /var/www/html/vuejs_lms
+COPY . /var/www/html/personal/vuejs_lms
 
 # Add Adminer installation
-RUN curl -k -L "https://www.adminer.org/latest.php" -o /var/www/html/vuejs_lms/public/adminer.php
+RUN curl -k -L "https://www.adminer.org/latest.php" -o /var/www/html/personal/vuejs_lms/public/adminer.php
 
 # Install Composer dependencies
 RUN composer install --ignore-platform-reqs
