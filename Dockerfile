@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
     nginx \
     libxml2-dev \
     libzip-dev \
-    default-mysql-client \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql \
     && docker-php-ext-install zip \
@@ -39,10 +38,7 @@ COPY composer.json auth.json ./
 COPY package.json ./
 
 # Copy project files
-COPY . /var/www/html/personal/vuejs_lms
-
-# Add Adminer installation
-RUN curl -k -L "https://www.adminer.org/latest.php" -o /var/www/html/personal/vuejs_lms/public/adminer.php
+COPY . /var/www/html/vuejs_lms
 
 # Install Composer dependencies
 RUN composer install --ignore-platform-reqs
